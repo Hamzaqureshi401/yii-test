@@ -26,6 +26,21 @@ class CategoryController extends Controller
         ]);
     }
 
+      public function actionStore()
+    {
+        $model = new Category();
+
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->save();
+            Yii::$app->session->setFlash('success', 'Category created successfully.');
+            return 'success';// Redirect to the category list page
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
+    }
+
     // ...
 }
 
